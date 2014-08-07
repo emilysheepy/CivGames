@@ -1,0 +1,45 @@
+
+* Get Water! study Spring 2013 .
+* Waddington Lab - Emily Sheepy
+
+
+* iGEQ  . 
+RECODE
+iGEQ_1	iGEQ_2	iGEQ_3	iGEQ_4	iGEQ_5	iGEQ_6	iGEQ_7	iGEQ_8	iGEQ_9	iGEQ_10	iGEQ_11	iGEQ_12	iGEQ_13	iGEQ_14
+  ("1 - Slightly " =1) ("2 - Moderately" = 2) ("3 - Fairly" = 3) ("4 - Extremely" = 4) ("0 - Not at all" = 0) (ELSE=999) INTO
+  iGEQ_1x	iGEQ_2x	iGEQ_3x	iGEQ_4x	iGEQ_5x	iGEQ_6x	iGEQ_7x	iGEQ_8x	iGEQ_9x	iGEQ_10x	iGEQ_11x	iGEQ_12x	iGEQ_13x	iGEQ_14x .
+EXECUTE.
+
+*Compute components. 
+
+COMPUTE iGEQ_challenge = MEAN(iGEQ_12x,	iGEQ_13x).
+EXECUTE.
+
+COMPUTE iGEQ_competence = MEAN(iGEQ_2x, iGEQ_9x).
+EXECUTE.
+
+COMPUTE iGEQ_flow = MEAN(iGEQ_10x, iGEQ_5x).
+EXECUTE.
+
+COMPUTE iGEQ_negative = MEAN(iGEQ_8x, iGEQ_6x).
+EXECUTE.
+
+COMPUTE iGEQ_positive =  MEAN(iGEQ_11x, iGEQ_14x) .
+EXECUTE.
+
+COMPUTE iGEQ_immersion =  MEAN(iGEQ_1x, iGEQ_4x) .
+EXECUTE.
+
+COMPUTE iGEQ_tension =  MEAN(iGEQ_8x, iGEQ_6x) .
+EXECUTE.
+
+*Compute Z scores for components.
+
+DESCRIPTIVES VARIABLES=iGEQ_challenge iGEQ_competence iGEQ_flow iGEQ_negative iGEQ_positive iGEQ_immersion iGEQ_tension
+  /SAVE
+  /STATISTICS=MEAN STDDEV MIN MAX.
+
+
+
+
+
